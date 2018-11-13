@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!--meta tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge, chrome=1">
+
+  <!-- title tag -->
+  <title>MEAN</title>
+  <base href="/">
+
+  <!-- meta tags -->
+  <meta name="fragment" content="!" />
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+  <meta name="keywords" content="Angularjs, javascript, MEAN, Nodejs, Express, Mongodb">
+  <meta name="description" content="MEAN Application">
+
+  <!-- favicon -->
+  <link rel="shortcut icon" href="images/favicon.ico" type="images/x-icon" />
+  <link rel="icon" href="images/favicon.ico" type="images/x-icon" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="images/icon.png" />
+
+  <!-- meta tags -->
+  <meta name="author" content="blueCodeman" />
+  <meta name="msapplication-TileColor" content="#e1eaf4" />
+  <meta name="theme-color" content="#e1eaf4" />
+
+  <!-- stylesheets -->
+  <!-- elementary -->
+  <link rel="stylesheet" type="text/css" href="styles/elementary.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <!-- custom -->
+  <link rel="stylesheet" type="text/css" href="styles/style.css">
+  <style>
+    /* gives the class early */
+    [ng\:cloak],
+    [ng-cloak],
+    [data-ng-cloak],
+    [x-ng-cloak],
+    .ng-cloak,
+    .x-ng-cloak,
+    .ng-hide {
+      display: none !important;
+    }
+  </style>
+
+  </script>
+
+</head>
+
+<body ng-app="myApp" ng-strict-di>
+
+  <div class="container-fluid" ng-cloak>
+
+    <div ng-view></div>
+
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+  <script src="https://code.angularjs.org/1.7.2/angular-route.min.js"></script>
+
+  <!-- scripts -->
+  <script src="./scripts/module.js"></script>
+  <script src="./scripts/router.js"></script>
+  <script src="./scripts/script.js"></script>
+
+</body>
