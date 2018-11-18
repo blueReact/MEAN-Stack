@@ -11,10 +11,22 @@ function config($routeProvider) {
       templateUrl: 'partials/main.partial.html',
       controller: 'myCtrl',
       controllerAs: 'vm'
-    })    
+    })  
+    .when('/apirestricted', {
+      templateUrl: 'partials/apiPost.partial.html',
+      controller: 'myCtrl',
+      controllerAs: 'vm'
+    }) 
+    .when('/data', {
+      templateUrl: 'partials/apiGet.partial.html',
+      controller: 'myCtrl',
+      controllerAs: 'vm'
+    })     
     .otherwise({
       templateUrl : "partials/404.partial.html",
       controller: 'myCtrl',
       controllerAs: 'vm'
     });
-}
+
+
+  }
