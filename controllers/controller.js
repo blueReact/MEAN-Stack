@@ -43,7 +43,7 @@ module.exports.data = function (req, res) {
       res.status(403).json(err)
     else
       res.status(200).json({
-        "message": "Welcome to the restricted API",
+        "message": "Welcome to the restricted data API",
         "authData": authData
       });
 

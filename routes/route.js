@@ -1,7 +1,8 @@
 var router = require('express').Router(),
     verifyToken = require('../middleware/jwt-route-auth'),
-    //controller
-    controllerApi = require('../controllers/api');
+    
+    // controller
+    controllerApi = require('../controllers/controller');
 
    
 router.post('/api', verifyToken, controllerApi.restrictedApi);

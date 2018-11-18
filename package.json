@@ -19,6 +19,7 @@
   "homepage": "https://github.com/roycodeman/MEAN-test-serve-ajs#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
     "express": "^4.16.4",
     "helmet": "^3.15.0",
     "jsonwebtoken": "^8.4.0",

@@ -2,11 +2,11 @@ var express = require('express'),
     app = express(),
     favicon = require('serve-favicon'),
     path = require('path'),
-    morgan = require('morgan'),
     bodyParser = require('body-parser'),
     helmet = require('helmet'),
-    router = require('./routes/initial');
-
+    compression = require('compression')
+    morgan = require('morgan'),
+    router = require('./routes/route');
 
 /*
  * middlewares
@@ -18,7 +18,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use(morgan('dev')); // console logger for dev only
+app.use(morgan('common')); // console logger for dev only
+app.use(compression());    // to make requests lighter and load faster
 app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 

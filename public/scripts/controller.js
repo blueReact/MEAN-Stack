@@ -26,13 +26,17 @@
           console.log(err)
         })
     }
+    
+    var token = "Bearer" + " " + localStorage.getItem("JWT");
+    console.log(token);
 
     // restricted API
     vm.apiPost = function () {
+      console.log(vm.apipost +  ' ' + token);
       $http({
           method: 'POST',
           url: '/api',
-          data: vm.apiPost,
+          data: vm.apipost,
           headers: {
             'Content-Type': 'application/json',
             Authorization: token
