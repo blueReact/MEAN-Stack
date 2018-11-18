@@ -6,7 +6,14 @@ var express = require('express'),
     helmet = require('helmet'),
     compression = require('compression')
     morgan = require('morgan'),
-    router = require('./routes/route');
+    mongoose = require('mongoose'),
+    router = require('./routes/route'),
+    port = process.env.PORT || 3000;
+
+
+// connect to mongodb
+mongoose.connect('mongodb://localhost/meanAJS' , { useNewUrlParser: true });
+mongoose.Promise = global.Promise;
 
 /*
  * middlewares
@@ -30,6 +37,6 @@ app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 app.use('/', router);
 
 // listening @ 3k port
-app.listen(3000, function () {
-  console.log('listening at port 3000...')
+app.listen(port, function () {
+  console.log('listening at port', port)
 });

@@ -23,6 +23,7 @@
     "express": "^4.16.4",
     "helmet": "^3.15.0",
     "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.3.12",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
