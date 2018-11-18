@@ -1,7 +1,7 @@
 module.exports = function (req, res, next) {
 
     var bearerHeader = req.headers.authorization;
-    console.log('middleware token', bearerHeader)
+    // console.log('middleware token', bearerHeader)
 
     if (typeof bearerHeader !== 'undefined' && bearerHeader !== '') {
 

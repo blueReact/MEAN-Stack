@@ -1,19 +1,36 @@
-var jwt = require('jsonwebtoken');
+var jwt = require('jsonwebtoken'),
 
+  // login Schema
+  loginUser = require('../models/login');
 
 module.exports.login = function (req, res) {
 
-  var user = {
-    username: req.body.username,
-    password: req.body.password
-  }
+  // var user = {
+  // username: req.body.username,
+  // password: req.body.password
+  // }
+
+  var user = new loginUser();
+
+  user.username = req.body.username;
+  user.password = req.body.password;
 
   jwt.sign({
     user: user
   }, process.env.JWT_KEY, function (err, token) {
-    res.json({
-      token: token
-    });
+
+    user.save().then(function (result) {
+
+        // created successfully
+        res.status(201).json({
+          token: token
+        });
+
+      })
+      .catch(function (err) {
+        res.send(err);
+      });
+
   });
 
 }
