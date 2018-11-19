@@ -7,13 +7,13 @@ config.$inject = ['$routeProvider'];
 
 function config($routeProvider) {
   $routeProvider
-    .when('/', {
-      templateUrl: 'partials/main.partial.html',
+    .when('/login', {
+      templateUrl: 'partials/login.partial.html',
       controller: 'myCtrl',
       controllerAs: 'vm'
     })  
-    .when('/apirestricted', {
-      templateUrl: 'partials/apiPost.partial.html',
+    .when('/register', {
+      templateUrl: 'partials/register.partial.html',
       controller: 'myCtrl',
       controllerAs: 'vm'
     }) 
@@ -23,10 +23,9 @@ function config($routeProvider) {
       controllerAs: 'vm'
     })     
     .otherwise({
-      templateUrl : "partials/404.partial.html",
+      templateUrl : 'partials/404.partial.html',
       controller: 'myCtrl',
       controllerAs: 'vm'
     });
-
 
   }

@@ -1,0 +1,14 @@
+<h1>Login Page</h1>
+
+<form>
+    Username: <input type="text" ng-model="vm.register.username"><br/><br/>
+    Password: <input type="text" ng-model="vm.register.password"><br/><br/>
+    Email: <input type="text" ng-model="vm.register.email"><br/><br/>
+   
+    <br/><br/>
+    <input type="submit" ng-click="vm.registerUser()"/>    
+   
+</form>
+<br/><br/>
+
+{{vm.response }}

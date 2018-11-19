@@ -8,6 +8,7 @@ var express = require('express'),
     morgan = require('morgan'),
     mongoose = require('mongoose'),
     router = require('./routes/route'),
+    registerRoute = require('./routes/registerRoute'),
     port = process.env.PORT || 3000;
 
 
@@ -36,7 +37,10 @@ app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
  */
 app.use('/', router);
 
-// listening @ 3k port
+// register route
+app.use('/register', registerRoute);
+
+// listening @ port
 app.listen(port, function () {
   console.log('listening at port', port)
 });

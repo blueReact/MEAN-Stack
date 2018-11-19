@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var loginSchema = new Schema({
+var registerSchema = new Schema({
     created: {
         type: Date,
         default: Date.now()
@@ -15,9 +15,14 @@ var loginSchema = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+    email: {
+        type: String,
+        require: true,
+        trim: true
     }
 });
 
 
-module.exports = mongoose.model('loginCollection', loginSchema);
+module.exports = mongoose.model('registerCollection', registerSchema);
 

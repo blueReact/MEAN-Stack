@@ -6,37 +6,38 @@
     .module('myApp')
     .controller('myCtrl', myCtrl);
 
-  myCtrl.$inject = ['$scope', '$http'];
+  myCtrl.$inject = ['$scope', '$http', '$location'];
 
-  function myCtrl($scope, $http) {
+  function myCtrl($scope, $http, $location) {
 
-    var vm = this;
-    vm.data = "Angularjs";
+    var vm = this;    
     vm.fourNotFour = "404";
 
     console.log(vm.data);
 
     // login
-    vm.submit = function () {
-      $http.post('/api/login', vm.user).then(function (response) {
+    vm.login = function () {
+      $http.post('/login', vm.user).then(function (response) {
           vm.response = response.data;
+          // console.log(vm.response);
           localStorage.setItem("JWT", vm.response.token)
+          $location.path("/data")
         })
         .catch(function (err) {
           console.log(err)
-        })
+        });
     }
     
     var token = "Bearer" + " " + localStorage.getItem("JWT");
-    console.log(token);
+    // console.log(token);
 
-    // restricted API
-    vm.apiPost = function () {
-      console.log(vm.apipost +  ' ' + token);
+    // restricted User
+    vm.registerUser = function () {
+      console.log(vm.register);
       $http({
           method: 'POST',
-          url: '/api',
-          data: vm.apipost,
+          url: '/register/api',
+          data: vm.register,
           headers: {
             'Content-Type': 'application/json',
             Authorization: token
@@ -44,20 +45,22 @@
         })
         .then(function (response) {
           vm.response = response.data;
+          $location.path("/login");
         })
         .catch(function (err) {
           console.log(err);
-        })
+        });
     }
 
     // http GET
-    var token3rdparty = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoidHl1aSIsInBhc3N3b3JkIjoidHl1aSJ9LCJpYXQiOjE1NDI1NDczMTN9.46o8a-2ksgGpXhco0w-ljm-meCkbgFWWBzZefVfseoc';
+    // var token3rdparty = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoidHl1aSIsInBhc3N3b3JkIjoidHl1aSJ9LCJpYXQiOjE1NDI1NDczMTN9.46o8a-2ksgGpXhco0w-ljm-meCkbgFWWBzZefVfseoc';
+   
     $http({
         method: 'get',
         url: '/data',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: token3rdparty
+          Authorization: token
         }
       })
       .then(function (response) {
@@ -67,6 +70,12 @@
       .catch(function (err) {
         console.log(err);
       });
+
+
+      // to clear specific local storage based on key i.e JWT in this case
+      vm.clearLocalStorage = function(){
+        window.localStorage.removeItem("JWT");
+      }
 
   };
 
