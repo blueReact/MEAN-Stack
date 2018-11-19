@@ -39,8 +39,7 @@
           url: '/register/api',
           data: vm.register,
           headers: {
-            'Content-Type': 'application/json',
-            Authorization: token
+            'Content-Type': 'application/json'           
           }
         })
         .then(function (response) {
