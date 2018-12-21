@@ -21,12 +21,12 @@ module.exports.register = function (req, res) {
         bcrypt.hash(req.body.password, salt, function (err, hash) {
 
           //store hash in DB
-          console.log('hash', hash)
+          console.log('hash', hash);            
 
           registerUser.create({
               username: req.body.username,
               password: hash,
-              email: req.body.email
+              email: (req.body.email).toLowerCase()
             })
             .then(function (result) {
 
@@ -51,9 +51,9 @@ module.exports.register = function (req, res) {
 
 module.exports.login = function (req, res) {
   registerUser.find({
-    email: req.body.email
+    email: (req.body.email).toLowerCase()
   }).then(function (user) {
-    bcrypt.compare(req.body.password, user[0].password, function (err, result) {
+    bcrypt.compare((req.body.password).toLowerCase(), user[0].password, function (err, result) {
       if (err)
         console.log(err)
       if (result) {
