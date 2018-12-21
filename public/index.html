@@ -55,11 +55,16 @@
 
   <div class="container-fluid" ng-cloak>
 
+    <!-- header -->
+    <div ng-include="'partials/header.partial.html'"></div>
+
     <div ng-view></div>
 
   </div>
 
+  <!-- library scripts -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-cookies.min.js"></script>
   <script src="https://code.angularjs.org/1.7.2/angular-route.min.js"></script>
 
   <!-- scripts -->

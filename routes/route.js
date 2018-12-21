@@ -1,14 +1,17 @@
 var router = require('express').Router(),
-    verifyToken = require('../middleware/jwt-route-auth'),
-
+    
     // controllers
     loginController = require('../controllers/registerController'),
-    controllerApi = require('../controllers/controller');
+    controllerApi = require('../controllers/controller'),
+
+    // auth
+    auth = require('../middleware/is-auth');
+    verifyToken = require('../middleware/jwt-route-auth');
 
 // login for new user
-router.post('/login', loginController.login);
+router.post('/login', verifyToken, loginController.login);
 
 // restricted API
-router.get('/data', verifyToken, controllerApi.data);
+router.get('/data', auth, verifyToken, controllerApi.data);
 
 module.exports = router

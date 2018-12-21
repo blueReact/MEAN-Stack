@@ -1,4 +1,5 @@
 var jwt = require('jsonwebtoken');
+    registerUser = require('../models/registerModel');
 
 module.exports.data = function (req, res) {
 
@@ -7,10 +8,10 @@ module.exports.data = function (req, res) {
     if (err)
       res.status(403).json(err)
     else
-      res.status(200).json({
-        "message": "Welcome to the restricted data API",
-        "authData": authData
-      });
+      
+      res.json({
+        authData: authData
+      })
 
   });
 }

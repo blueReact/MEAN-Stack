@@ -11,6 +11,10 @@ var registerSchema = new Schema({
         required: true,
         trim: true
     },
+    admin: {
+        type: Boolean,
+        default: false
+    },
     password: {
         type: String,
         required: true,

@@ -4,5 +4,5 @@
   
 // app.module.js
 angular
-    .module('myApp', ['ngRoute']);
+    .module('myApp', ['ngRoute', 'ngCookies']);
 })();

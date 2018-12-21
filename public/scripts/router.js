@@ -21,6 +21,11 @@ function config($routeProvider) {
       templateUrl: 'partials/apiGet.partial.html',
       controller: 'myCtrl',
       controllerAs: 'vm'
+    })
+    .when('/blog', {
+      templateUrl: 'partials/blog.partial.html',
+      controller: 'myCtrl',
+      controllerAs: 'vm'
     })     
     .otherwise({
       templateUrl : 'partials/404.partial.html',

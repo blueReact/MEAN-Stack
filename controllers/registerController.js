@@ -57,17 +57,36 @@ module.exports.login = function (req, res) {
       if (err)
         console.log(err)
       if (result) {
+
+        // creating a session varibale on the client side with boolean value for now
+        // not suing it in the client side yet
+        // just a demo to create session variable
+        // it writes to client side localstorage
+        req.session.isLoggedIn = true;
+
+        // setting in the localstorage
+        req.session.isAdmin = user[0].admin;
+
         var token = jwt.sign({
           email: user[0].email,
           userId: user[0]._id
         }, process.env.JWT_KEY);
 
+        // setting a cookie with the useranme after succesfull login
+        res.cookie('username', user[0].username);
+
+        // logged in successfully
         res.status(200).json({
           message: 'Auth successfull',
-          token: token
+          token: token,
+          admin: user[0].admin,
+          isLoggedIn: true
         });
+
       } else {
-        // nevewr share why it failed
+
+        // never share why it failed
+        // security
         res.status(401).json({
           message: 'Auth failed'
         });
@@ -76,6 +95,21 @@ module.exports.login = function (req, res) {
     });
   }).catch(function (err) {
     res.send(err);
+  });
+
+}
+
+
+module.exports.logout = function (req, res) {
+  
+  console.log('logout' ,req)
+
+  req.session.destroy(function(){
+
+    res.status(555).json({
+      message: 'sessin destroyed!!!'
+    });
+    
   });
 
 }

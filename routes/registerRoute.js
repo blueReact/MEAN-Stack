@@ -4,6 +4,9 @@ var router = require('express').Router(),
     registerController = require('../controllers/registerController');
 
 // to reigster a new user;
-router.post('/api', registerController.register);
+router.post('/register/api', registerController.register);
+
+// logout
+router.post('/logout', registerController.logout);
 
 module.exports = router
