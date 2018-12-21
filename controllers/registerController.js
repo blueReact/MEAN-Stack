@@ -107,7 +107,7 @@ module.exports.logout = function (req, res) {
   req.session.destroy(function(){
 
     res.status(555).json({
-      message: 'sessin destroyed!!!'
+      message: 'session destroyed!!!'
     });
     
   });

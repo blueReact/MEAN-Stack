@@ -17,15 +17,21 @@
     // console.log(token);
 
     // global and runs everytime
-    $rootScope.admin =localStorage.getItem("admin");
-    $rootScope.isLoggedIn =localStorage.getItem("isLoggedIn");
-    console.log($rootScope.admin);
+    if(localStorage.getItem("admin")) {
+      $rootScope.admin =localStorage.getItem("admin");
+    }      
 
+    if(localStorage.getItem("isLoggedIn")) {
+       $rootScope.isLoggedIn =localStorage.getItem("isLoggedIn");
+       console.log($rootScope.admin);
+    }
+     
     // checking if I can get the cookiename
-
-    var favouriteCookie = $cookies.get('username')
-    console.log(favouriteCookie);
-
+    if($cookies.get('username')) {
+      var favouriteCookie = $cookies.get('username')
+      console.log(favouriteCookie);
+    }
+    
     // login
     vm.login = function () {
       $http({
@@ -64,10 +70,8 @@
             $location.path("/login");
           }
         });
-    }
+    }  
     
-    
-
     // restricted User
     vm.registerUser = function () {
       console.log(vm.register);
