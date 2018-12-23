@@ -1,4 +1,5 @@
-var router = require('express').Router(),   
+var router = require('express').Router(),
+    { check } = require('express-validator/check'),   
 
     // controllers    
     registerController = require('../controllers/registerController'),
@@ -8,10 +9,29 @@ var router = require('express').Router(),
 
 
 // POST /user/login
-router.post('/login', verifyToken, registerController.login);
+router.post('/login', verifyToken, [
+
+    // must be an email
+    check('email').isEmail(),
+
+    // password must be at least 5 chars long
+    check('password').isLength({ min: 5 })
+
+  ], registerController.login);
 
 // POST /user/register
-router.post('/register', registerController.register);
+router.post('/register', [
+
+    // username must be at least 5 chars long
+    check('username').isLength({ min: 5 }),
+
+    // must be an email
+    check('email').isEmail(),
+
+    // password must be at least 5 chars long
+    check('password').isLength({ min: 5 })
+
+  ], registerController.register);
 
 // POST /user/logout
 router.post('/logout', registerController.logout);

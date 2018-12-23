@@ -2,12 +2,18 @@
 
 var bcrypt = require('bcryptjs'),
   jwt = require('jsonwebtoken'),
-  registerUser = require('../models/registerModel');
+  registerUser = require('../models/registerModel'),
+  { validationResult } = require('express-validator/check');
 
 
 module.exports.register = function (req, res) {
 
   console.log('req.body ==> ', req.body);
+
+  var errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
 
   registerUser.findOne({
     email: req.body.email
@@ -61,6 +67,11 @@ module.exports.register = function (req, res) {
 module.exports.login = function (req, res, next) {
 
   var password = req.body.password.toLowerCase();
+
+  var errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
 
   registerUser.find({
     email: (req.body.email).toLowerCase()
