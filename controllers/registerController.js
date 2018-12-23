@@ -21,12 +21,12 @@ module.exports.register = function (req, res) {
         bcrypt.hash(req.body.password, salt, function (err, hash) {
 
           //store hash in DB
-          console.log('hash', hash);            
-
+          console.log('hash', hash);
+          var email = req.body.email.toLowerCase()
           registerUser.create({
               username: req.body.username,
               password: hash,
-              email: (req.body.email).toLowerCase()
+              email: email
             })
             .then(function (result) {
 
@@ -43,17 +43,29 @@ module.exports.register = function (req, res) {
         });
       });
   }).catch(function (err) {
-    res.send(err);
+    // res.send(err);
+
+    // scalable and customizable approach 
+    // for catching errors inside catch block    
+    var err = new Error(err);
+    err.code = 500;
+    err.message = 'Registration failed';
+
+    // passing it to next middleware with err object
+    return next(err);
+
   });
 
 }
 
+module.exports.login = function (req, res, next) {
 
-module.exports.login = function (req, res) {
+  var password = req.body.password.toLowerCase();
+
   registerUser.find({
     email: (req.body.email).toLowerCase()
   }).then(function (user) {
-    bcrypt.compare((req.body.password).toLowerCase(), user[0].password, function (err, result) {
+    bcrypt.compare(password, user[0].password, function (err, result) {
       if (err)
         console.log(err)
       if (result) {
@@ -87,29 +99,47 @@ module.exports.login = function (req, res) {
 
         // never share why it failed
         // security
-        res.status(401).json({
+        return res.status(401).json({
           message: 'Auth failed'
         });
       }
 
     });
   }).catch(function (err) {
-    res.send(err);
+
+    // shorthand error handler
+    // res.send(err); 
+
+    // another kind but repetitive
+    /*    
+    return res.status(500).json({
+      errorMessage: 'Database operation failed'
+    }); 
+    */
+
+    // scalable and customizable approach 
+    // for catching errors inside catch block 
+    var err = new Error(err);
+    err.code = 500;
+    err.message = 'Login failed';
+
+    // passing it to next middleware with err object
+    return next(err);
+
   });
 
 }
 
-
 module.exports.logout = function (req, res) {
-  
-  console.log('logout' ,req)
 
-  req.session.destroy(function(){
+  console.log('logout', req)
+
+  req.session.destroy(function () {
 
     res.status(555).json({
       message: 'session destroyed!!!'
     });
-    
+
   });
 
 }

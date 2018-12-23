@@ -16,7 +16,7 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
 
     // import routes
-    router = require('./routes/route'),
+    data = require('./routes/data'),
     registerRoute = require('./routes/registerRoute'),
     adminRoute = require('./routes/adminRoute'),
 
@@ -64,13 +64,20 @@ app.use(session({ secret: 'my session secret', resave: false, saveUninitialized:
  * routes
  *
  */
-app.use('/', router);
+app.use('/', data);
 
-// register route
-app.use('/', registerRoute);
+// register a user
+app.use('/user', registerRoute);
 
 // admin
-app.use('/', adminRoute);
+app.use('/api', adminRoute);
+
+// error handling middleware
+app.use(function(err, req, res, next){
+  return res.status(err.code).json({    
+    message: err.message
+  });
+});
 
 // listening @ port
 app.listen(port, function () {

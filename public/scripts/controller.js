@@ -20,7 +20,6 @@
     if(localStorage.getItem("admin")) {
       $rootScope.admin =localStorage.getItem("admin");
     }      
-
     if(localStorage.getItem("isLoggedIn")) {
        $rootScope.isLoggedIn =localStorage.getItem("isLoggedIn");
        console.log($rootScope.admin);
@@ -36,7 +35,7 @@
     vm.login = function () {
       $http({
         method: 'post',
-        url: '/login',
+        url: '/user/login',
         data: vm.user,
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +57,7 @@
 
     // logout
     vm.logout = function () {
-      $http.post('/logout', vm.user).then(function (response) {
+      $http.post('/user/logout', vm.user).then(function (response) {
           vm.response = response.data;
           console.log(vm.response);  
         })
@@ -70,14 +69,16 @@
             $location.path("/login");
           }
         });
-    }  
+    }
     
+    
+
     // restricted User
     vm.registerUser = function () {
       console.log(vm.register);
       $http({
           method: 'POST',
-          url: '/register/api',
+          url: '/user/register',
           data: vm.register,
           headers: {
             'Content-Type': 'application/json'           
@@ -92,7 +93,7 @@
         });
     }
 
-    // http GET
+    // http GET data
     // var token3rdparty = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoidHl1aSIsInBhc3N3b3JkIjoidHl1aSJ9LCJpYXQiOjE1NDI1NDczMTN9.46o8a-2ksgGpXhco0w-ljm-meCkbgFWWBzZefVfseoc';
    
     $http({
@@ -110,6 +111,28 @@
       .catch(function (err) {
         console.log(err);
       });
+
+
+
+    // blog
+    $http({
+      method: 'get',
+      url: '/api/blog',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token
+      }
+    })
+    .then(function (response) {
+      console.log(response);
+      vm.blog = response.data;
+    })
+    .catch(function (err) {
+      console.log(err);
+      if(err.status === 401) {
+        vm.err = err.data
+      }
+    });
 
 
       // to clear specific local storage based on key i.e JWT in this case
