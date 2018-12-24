@@ -13,11 +13,11 @@ router.post('/login', verifyToken, [
 
     // must be an email
     // trimming for white space is done in my model
-    check('email').isEmail(),
+    check('email').isEmail().withMessage("Please enter a valid email"),
 
     // password must be at least 5 chars long
     // trimming for white space is done in my model
-    check('password').isLength({ min: 5 })
+    check('password').isLength({ min: 5 }).withMessage("Password must be 5 characters long")
 
   ], registerController.login);
 
@@ -26,15 +26,15 @@ router.post('/register', [
 
     // username must be at least 5 chars long
     // trimming for white space is done in my model
-    check('username').isLength({ min: 5 }),
+    check('username').isLength({ min: 5 }).withMessage("Password must be 5 characters long"),
 
     // must be an email
     // trimming for white space is done in my model
-    check('email').isEmail(),
+    check('email').isEmail().withMessage("Please enter a valid email"),
 
     // password must be at least 5 chars long
     // trimming for white space is done in my model
-    check('password').isLength({ min: 5 })
+    check('password').isLength({ min: 5 }).withMessage("Password must be 5 characters long")
 
   ], registerController.register);
 
