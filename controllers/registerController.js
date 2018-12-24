@@ -3,26 +3,45 @@
 var bcrypt = require('bcryptjs'),
   jwt = require('jsonwebtoken'),
   registerUser = require('../models/registerModel'),
-  { validationResult } = require('express-validator/check');
+  {
+    validationResult
+  } = require('express-validator/check');
 
 
-module.exports.register = function (req, res) {
+module.exports.register = function (req, res, next) {
 
   console.log('req.body ==> ', req.body);
 
   var errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
+    return res.status(422).json({
+      errors: errors.array()
+    });
   }
 
   registerUser.findOne({
     email: req.body.email
   }).then(function (user) {
-    if (user)
-      res.status(401).json({
+
+    if (user) {
+
+      // if you want to send specific error and handle it here
+      // then this approach
+      /* res.status(401).json({
         message: 'Auth Failed'
-      })
-    else
+      })*/
+
+
+      var err = new Error("Authentication Failed");
+      err.code = 401;
+
+      // pass it to catch block via throw
+      // throw err;
+
+      // or pass to next error handling middleware
+      next(err);
+
+    } else
       bcrypt.genSalt(12, function (err, salt) {
         bcrypt.hash(req.body.password, salt, function (err, hash) {
 
@@ -37,7 +56,6 @@ module.exports.register = function (req, res) {
             .then(function (result) {
 
               // created successfully
-
               res.status(201).json({
                 result: result
               });
@@ -68,17 +86,33 @@ module.exports.login = function (req, res, next) {
 
   var password = req.body.password.toLowerCase();
 
+  // express validator
   var errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
+    return res.status(422).json({
+      errors: errors.array()
+    });
   }
 
   registerUser.find({
     email: (req.body.email).toLowerCase()
   }).then(function (user) {
     bcrypt.compare(password, user[0].password, function (err, result) {
-      if (err)
-        console.log(err)
+      if (err) {
+
+        // console.log(err);
+
+        // scalable and customizable approach 
+        // for catching errors inside catch block 
+        var err = new Error(err);
+        err.code = 500;
+        err.message = 'Server failed';
+
+        // passing it to next catch block 
+        throw err;
+
+      }
+
       if (result) {
 
         // creating a session varibale on the client side with boolean value for now
