@@ -2,10 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var registerSchema = new Schema({
-    created: {
+    /* created: {
         type: Date,
         default: Date.now()
-    },
+    },*/
     username: {
         type: String,
         required: true,
@@ -25,6 +25,10 @@ var registerSchema = new Schema({
         require: true,
         trim: true
     }
+    
+},{
+    // creates both createdAt and updatedAt fields
+    timestamps: true
 });
 
 

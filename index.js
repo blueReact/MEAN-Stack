@@ -1,13 +1,14 @@
-var express = require('express'),
-    session =require('express-session'),
+var path = require('path'), 
 
+    express = require('express'),
+    session =require('express-session'),
+    
     // to store user session in mongodb
     // avoids entire memory usage for n number of users
     // diffren collections for it
     // right and safe way for production
     MongoDBStore = require('connect-mongodb-session')(session),    
-    favicon = require('serve-favicon'),
-    path = require('path'),
+    favicon = require('serve-favicon'),    
     bodyParser = require('body-parser'),
     helmet = require('helmet'),
     compression = require('compression')

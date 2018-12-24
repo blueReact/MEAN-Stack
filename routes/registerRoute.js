@@ -12,9 +12,11 @@ var router = require('express').Router(),
 router.post('/login', verifyToken, [
 
     // must be an email
+    // trimming for white space is done in my model
     check('email').isEmail(),
 
     // password must be at least 5 chars long
+    // trimming for white space is done in my model
     check('password').isLength({ min: 5 })
 
   ], registerController.login);
@@ -23,12 +25,15 @@ router.post('/login', verifyToken, [
 router.post('/register', [
 
     // username must be at least 5 chars long
+    // trimming for white space is done in my model
     check('username').isLength({ min: 5 }),
 
     // must be an email
+    // trimming for white space is done in my model
     check('email').isEmail(),
 
     // password must be at least 5 chars long
+    // trimming for white space is done in my model
     check('password').isLength({ min: 5 })
 
   ], registerController.register);
