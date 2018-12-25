@@ -15,7 +15,7 @@ It is a collection of 4 major technologies as listed below:
 git clone https://github.com/roycodeman/MEAN-Stack
 
 # Change directory
-cd MEAN-test-serve-ajs
+cd MEAN-Stack
 
 # Install NPM dependencies
 npm install
