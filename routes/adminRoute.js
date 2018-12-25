@@ -1,14 +1,14 @@
 var router = require('express').Router(),   
-    blogController = require('../controllers/blogController');
+    admin = require('../controllers/admin'),
 
     // middleware auth
     auth = require('../middleware/is-auth'),
     verifyToken = require('../middleware/jwt-route-auth'),
-    admin = require('../middleware/is-admin');
+    adminAuth = require('../middleware/is-admin');
 
 // admin route 
 // restricted API
 // GET /api/blog
-router.get('/blog', auth, verifyToken, admin, blogController.blog);
+router.get('/blog', auth, verifyToken, adminAuth, admin.blog);
 
 module.exports = router;

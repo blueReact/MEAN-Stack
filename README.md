@@ -23,4 +23,4 @@ npm install
 # Start up the server
 npm start
 # or
-node index.js
+node index.js || node index
