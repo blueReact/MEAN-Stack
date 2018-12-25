@@ -45,9 +45,11 @@ module.exports.register = function (req, res, next) {
       bcrypt.genSalt(12, function (err, salt) {
         bcrypt.hash(req.body.password, salt, function (err, hash) {
 
-          //store hash in DB
+          // store hash in DB
           console.log('hash', hash);
-          var email = req.body.email.toLowerCase()
+
+          // toLowerCase the email
+          var email = req.body.email.toLowerCase();
           registerUser.create({
               username: req.body.username,
               password: hash,
@@ -84,8 +86,6 @@ module.exports.register = function (req, res, next) {
 
 module.exports.login = function (req, res, next) {
 
-  var password = req.body.password.toLowerCase();
-
   // express validator
   var errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -93,6 +93,8 @@ module.exports.login = function (req, res, next) {
       errors: errors.array()
     });
   }
+
+  var password = req.body.password.toLowerCase();  
 
   registerUser.find({
     email: (req.body.email).toLowerCase()

@@ -12,8 +12,17 @@ module.exports = function (req, res, next) {
 
         next();
     } else {
-        res.status(403).json({
+
+        /*res.status(403).json({
             "error": "forbidden route"
-        });
+        });*/
+
+        // scalable and customizable approach 
+        var err = new Error(err);
+        err.code = 403;
+        err.message = 'Forbidden route';
+
+        // passing it to next middleware with err object
+        return next(err);
     }
 }

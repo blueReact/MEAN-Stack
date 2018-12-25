@@ -17,19 +17,19 @@
     // console.log(token);
 
     // global and runs everytime
-    if(localStorage.getItem("admin")) {
+    //if(localStorage.getItem("admin")) {
       $rootScope.admin =localStorage.getItem("admin");
-    }      
-    if(localStorage.getItem("isLoggedIn")) {
+    //}      
+    //if(localStorage.getItem("isLoggedIn")) {
        $rootScope.isLoggedIn =localStorage.getItem("isLoggedIn");
        console.log($rootScope.admin);
-    }
+    //}
      
     // checking if I can get the cookiename
-    if($cookies.get('username')) {
+    //if($cookies.get('username')) {
       var favouriteCookie = $cookies.get('username')
       console.log(favouriteCookie);
-    }
+    //}
     
     // login
     vm.login = function () {
