@@ -12,7 +12,7 @@ It is a collection of 4 major technologies as listed below:
 ### Start in just 4 simple steps!
 
 # Get the latest snapshot
-git clone https://github.com/roycodeman/MEAN-test-serve-ajs.git
+git clone https://github.com/roycodeman/MEAN-Stack
 
 # Change directory
 cd MEAN-test-serve-ajs
