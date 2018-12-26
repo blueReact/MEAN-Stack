@@ -2,10 +2,21 @@
 
 var bcrypt = require('bcryptjs'),
   jwt = require('jsonwebtoken'),
+  nodemailer = require('nodemailer'),
+  sendGridTransport = require('nodemailer-sendgrid-transport'),
   registerUser = require('../models/registerModel'),
   {
     validationResult
-  } = require('express-validator/check');
+  } = require('express-validator/check'),
+  
+  transporter = nodemailer.createTransport(sendGridTransport({
+    host: 'smtp.sendgrid.net',
+    port: 587,
+    secure: false,
+    auth: {      
+      api_key: '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'
+    }
+  }));
 
 
 module.exports.register = function (req, res, next) {
@@ -210,8 +221,9 @@ module.exports.reset = function (req, res, next) {
 
     if (user) {
 
-      // console.log(user)
+      console.log(user)
 
+      // encrypting new password
       bcrypt.genSalt(12, function (err, salt) {
         bcrypt.hash(req.body.password.toLowerCase(), salt, function (err, hash) {
 
@@ -237,6 +249,22 @@ module.exports.reset = function (req, res, next) {
               res.send(err);
             });
         })
+      });
+
+      // mailOptions configuration
+      var mailOptions = {
+        from: 'roycodeman@gmail.com',
+        to: user.email,
+        subject: 'Password reset succeded!',
+        html: '<h1>Thank you</h1><p> Your password has been successgully reset!</p>'
+      };
+
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
       });
 
     } else {
