@@ -14,7 +14,7 @@ var bcrypt = require('bcryptjs'),
     port: 587,
     secure: false,
     auth: {      
-      api_key: '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'
+      api_key: process.env.SEND_GRID_API
     }
   }));
 
