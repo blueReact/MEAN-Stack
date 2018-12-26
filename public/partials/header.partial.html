@@ -2,7 +2,8 @@
 <div ng-controller="myCtrl as vm">
 
     <a ng-href="#!login" ng-hide="isLoggedIn">login</a>
-    <a ng-href="#!register">register</a>
+    <a ng-href="#!register" ng-hide="isLoggedIn">register</a>
+    <a ng-href="#!reset" ng-hide="!isLoggedIn">reset</a>
     <a ng-href="#!blog" ng-if="admin == 'true'">Blog</a>
     <a ng-click="vm.logout()" ng-hide="!isLoggedIn">logout</a>
 

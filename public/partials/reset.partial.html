@@ -1,0 +1,13 @@
+<h1>Reset Password</h1>
+
+<form>   
+    New: <input type="password" ng-model="vm.user.password"><br/><br/>
+    Retype New: <input type="password" ng-model="vm.user.passwordRetype"><br/><br/>
+    <br/><br/>
+    <input type="submit" ng-click="vm.reset()"/>    
+   
+</form>
+<br/><br/>
+
+
+{{vm.response }}

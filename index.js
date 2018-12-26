@@ -2,10 +2,10 @@ var path = require('path'),
 
     express = require('express'),
     session =require('express-session'),
-    
+
     // to store user session in mongodb
     // avoids entire memory usage for n number of users
-    // diffren collections for it
+    // different collections for it
     // right and safe way for production
     MongoDBStore = require('connect-mongodb-session')(session),    
     favicon = require('serve-favicon'),    

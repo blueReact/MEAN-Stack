@@ -26,6 +26,11 @@ function config($routeProvider) {
       templateUrl: 'partials/blog.partial.html',
       controller: 'myCtrl',
       controllerAs: 'vm'
+    })
+    .when('/reset', {
+      templateUrl: 'partials/reset.partial.html',
+      controller: 'myCtrl',
+      controllerAs: 'vm'
     })     
     .otherwise({
       templateUrl : 'partials/404.partial.html',

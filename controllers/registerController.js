@@ -94,7 +94,7 @@ module.exports.login = function (req, res, next) {
     });
   }
 
-  var password = req.body.password.toLowerCase();  
+  var password = req.body.password.toLowerCase();
 
   registerUser.find({
     email: (req.body.email).toLowerCase()
@@ -129,7 +129,9 @@ module.exports.login = function (req, res, next) {
         var token = jwt.sign({
           email: user[0].email,
           userId: user[0]._id
-        }, process.env.JWT_KEY, { expiresIn: '1h' }); // Adds extra security => { expiresIn: '1h' } || { algorithm: 'HS512' }
+        }, process.env.JWT_KEY, {
+          expiresIn: '1h'
+        }); // Adds extra security => { expiresIn: '1h' } || { algorithm: 'HS512' }
 
         // setting a cookie with the useranme after succesfull login
         res.cookie('username', user[0].username);
@@ -139,6 +141,7 @@ module.exports.login = function (req, res, next) {
           message: 'Auth successfull',
           token: token,
           admin: user[0].admin,
+          userId: user[0]._id,
           isLoggedIn: true
         });
 
@@ -177,9 +180,83 @@ module.exports.login = function (req, res, next) {
 
 }
 
+module.exports.reset = function (req, res, next) {
+
+  // express validator
+  var errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({
+      errors: errors.array()
+    });
+  }
+
+  // password's mismatch block
+  if (req.body.password !== req.body.retypePassword) {
+
+    // scalable and customizable approach 
+    // for catching errors inside catch block 
+    var err = new Error(err);
+    err.code = 422;
+    err.message = "Password's do not match";
+
+    // passing it to next middleware with err object
+    return next(err);
+
+  }
+
+  registerUser.findOne({
+    _id: req.body.userId
+  }).then(function (user) {
+
+    if (user) {
+
+      // console.log(user)
+
+      bcrypt.genSalt(12, function (err, salt) {
+        bcrypt.hash(req.body.password.toLowerCase(), salt, function (err, hash) {
+
+          registerUser
+            .findOneAndUpdate({
+              _id: req.body.userId
+            }, {
+              $set: {
+                password: hash
+              }
+            }, {
+              new: true
+            })
+            .then(function (result) {
+              console.log('reset then', result)
+              // updated successfully
+              res.status(204).json({
+                status: 'Password has been reset successfully!'
+              });
+
+            })
+            .catch(function (err) {
+              res.send(err);
+            });
+        })
+      });
+
+    } else {
+
+      // scalable and customizable approach 
+      // for catching errors inside catch block 
+      var err = new Error(err);
+      err.code = 500;
+      err.message = 'Password Reset failed';
+
+      // passing it to next middleware with err object
+      return next(err);
+    }
+
+  });
+}
+
 module.exports.logout = function (req, res) {
 
-  console.log('logout', req)
+  // console.log('logout', req)
 
   req.session.destroy(function () {
 

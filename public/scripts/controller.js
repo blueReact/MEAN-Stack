@@ -48,6 +48,7 @@
           localStorage.setItem("JWT", vm.response.token)
           localStorage.setItem("admin", vm.response.admin)
           localStorage.setItem("isLoggedIn", vm.response.isLoggedIn)
+          localStorage.setItem("userId", vm.response.userId)
           $location.path("/data")
         })
         .catch(function (err) {
@@ -69,8 +70,30 @@
             $location.path("/login");
           }
         });
-    }
+    } 
     
+    // reset
+    vm.reset = function() {
+      
+      console.log(vm.user.password + " =======" + localStorage.getItem("userId"));
+      $http({
+        method: 'post',
+        url: '/user/reset',
+        data: {'password': vm.user.password,'retypePassword': vm.user.passwordRetype, 'userId': localStorage.getItem("userId")},
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token
+        }
+      })
+      .then(function (response) {
+        vm.response = response.data;
+        console.log(vm.response);  
+      })
+      .catch(function (err) {
+        console.log(err);
+        
+      });
+    }
     
 
     // restricted User
@@ -140,6 +163,7 @@
         window.localStorage.removeItem("JWT");
         window.localStorage.removeItem("admin");
         window.localStorage.removeItem("isLoggedIn");
+        window.localStorage.removeItem("userId");
       }
 
   };
