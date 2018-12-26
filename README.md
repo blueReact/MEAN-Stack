@@ -3,10 +3,10 @@
 
 It is a collection of 4 major technologies as listed below:
 
-* MongoDB - MongoDB is the leading NoSQL database, empowering businesses to be more agile and scalable
-* Express - Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
-* AngularJS - based framework. AngularJS lets you extend HTML vocabulary for your application. The resulting environment is extraordinarily expressive, readable, and quick to develop.
-* Node.js - Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine for easily building fast, scalable web and network applications.
+* [ MongoDB ](https://www.mongodb.com/) - MongoDB is the leading NoSQL database, empowering businesses to be more agile and scalable
+* [ Express ](https://expressjs.com/) - Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
+* [ AngularJS ](https://angularjs.org/) - based framework. AngularJS lets you extend HTML vocabulary for your application. The resulting environment is extraordinarily expressive, readable, and quick to develop.
+* [ NodeJS ](https://nodejs.org/en/) - Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine for easily building fast, scalable web and network applications.
 
 # Pre-Requisites
 * Download and Install mongodb
@@ -18,16 +18,16 @@ It is a collection of 4 major technologies as listed below:
 # Getting Started
 ### Start in just 4 simple steps!
 
-# Get the latest snapshot
+##### Get the latest snapshot
 git clone https://github.com/roycodeman/MEAN-Stack
 
-# Change directory
+##### Change directory
 cd MEAN-Stack
 
-# Install NPM dependencies
+##### Install NPM dependencies
 npm install
 
-# Start up the server
+##### Start up the server
 npm start
-# or
+##### or
 node index.js || node index
