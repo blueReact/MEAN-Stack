@@ -8,6 +8,13 @@ It is a collection of 4 major technologies as listed below:
 * AngularJS - based framework. AngularJS lets you extend HTML vocabulary for your application. The resulting environment is extraordinarily expressive, readable, and quick to develop.
 * Node.js - Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine for easily building fast, scalable web and network applications.
 
+# Pre-Requisites
+* Download and Install mongodb
+    * [ OSX MongoDB ](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
+    * [ Windows Mongodb ](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
+
+* [ Download and Install Node.js ](https://nodejs.org/en/)
+
 # Getting Started
 ### Start in just 4 simple steps!
 
