@@ -44,7 +44,7 @@ node index.js || node index
 # Custom Build Tools for production
 ### One of the major enhancement post development & testing is to minify the codebase. Well this is boring, stressful and demoralizing task. But despite saying this, it must and should be executed. One of the main reasons being getting higher application performance and to uglify the codebase. So to make my life little simple; I have built my own JS minifier. 
 
-*[ JS minifier ](https://github.com/roycodeman/minifier)
+* [ JS minifier ](https://github.com/roycodeman/minifier)
 
 ##### To run minification of the client side JS
 npm run minify
