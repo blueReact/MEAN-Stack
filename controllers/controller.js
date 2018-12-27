@@ -1,4 +1,7 @@
-var jwt = require('jsonwebtoken');
+'use strict';
+
+//controller
+var jwt = require('jsonwebtoken'),
     registerUser = require('../models/registerModel');
 
 module.exports.data = function (req, res) {

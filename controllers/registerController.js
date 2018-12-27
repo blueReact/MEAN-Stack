@@ -1,5 +1,6 @@
-// Register Schema
+'use strict';
 
+// Register Controller
 var bcrypt = require('bcryptjs'),
   jwt = require('jsonwebtoken'),
   nodemailer = require('nodemailer'),

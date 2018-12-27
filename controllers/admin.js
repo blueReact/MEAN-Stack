@@ -1,3 +1,6 @@
+'use strict';
+
+// admin
 var jwt = require('jsonwebtoken');
 
 // admin protected route

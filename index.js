@@ -1,3 +1,5 @@
+'use strict';
+
 var path = require('path'), 
 
     express = require('express'),
@@ -11,7 +13,7 @@ var path = require('path'),
     favicon = require('serve-favicon'),    
     bodyParser = require('body-parser'),
     helmet = require('helmet'),
-    compression = require('compression')
+    compression = require('compression'),
     morgan = require('morgan'),
     mongoose = require('mongoose'),
     cookieParser = require('cookie-parser'),
