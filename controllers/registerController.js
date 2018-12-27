@@ -7,8 +7,9 @@ var bcrypt = require('bcryptjs'),
   registerUser = require('../models/registerModel'),
   {
     validationResult
-  } = require('express-validator/check'),
-  
+  } = require('express-validator/check'),  
+
+  // configuring transporter
   transporter = nodemailer.createTransport(sendGridTransport({
     host: 'smtp.sendgrid.net',
     port: 587,
