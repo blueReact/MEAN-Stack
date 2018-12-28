@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/roycodeman/MEAN-test-serve-ajs.git"
+    "url": "git+https://github.com/roycodeman/MEAN-Stack.git"
   },
   "author": "codeman",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/roycodeman/MEAN-test-serve-ajs/issues"
+    "url": "https://github.com/roycodeman/MEAN-Stack/issues"
   },
-  "homepage": "https://github.com/roycodeman/MEAN-test-serve-ajs#readme",
+  "homepage": "https://github.com/roycodeman/MEAN-Stack#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
