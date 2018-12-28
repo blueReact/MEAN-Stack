@@ -7,7 +7,7 @@ config.$inject = ['$routeProvider'];
 
 function config($routeProvider) {
   $routeProvider
-    .when('/login', {
+    .when('/', {
       templateUrl: 'partials/login.partial.html',
       controller: 'myCtrl',
       controllerAs: 'vm'

@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const UglifyJS = require("uglify-js");
+const chalk = require("chalk");
 
 var dirname = './public/scripts/app';
 var filePath = dirname + '/minify.js';
@@ -70,23 +71,23 @@ if (fs.existsSync(dirname) && !fs.existsSync(filePath)) {
 
                 fs.unlink(dirname + '/' + filename, (err) => {
                     if (err) throw err;
-                    global.console.log(filename, 'was skipped and trashed!');
+                    global.console.log(chalk.red(filename, 'was skipped and trashed!'));
                 });
 
             }
 
-        });
+        });       
 
-        console.log('Minified JS has been created successfully!');
+        global.console.log(chalk`Minified JS has been created {green.bold successfully}`);
 
     });
 
 }
 
 if (fs.existsSync(filePath)) {
-    global.console.log('File already exists!');
+    global.console.log(chalk.red('File already exists!'));
 }
 
 if (!fs.existsSync(dirname)) {
-    global.console.log('Unable to find public folder! Please make sure it exits.');
+    global.console.log(chalk.red('Unable to find public folder! Please make sure it exits.'));
 }

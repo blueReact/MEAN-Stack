@@ -8,14 +8,14 @@ var bcrypt = require('bcryptjs'),
   registerUser = require('../models/registerModel'),
   {
     validationResult
-  } = require('express-validator/check'),  
+  } = require('express-validator/check'),
 
   // configuring transporter
   transporter = nodemailer.createTransport(sendGridTransport({
     host: 'smtp.sendgrid.net',
     port: 587,
     secure: false,
-    auth: {      
+    auth: {
       api_key: process.env.SEND_GRID_API
     }
   }));
@@ -261,7 +261,7 @@ module.exports.reset = function (req, res, next) {
         html: '<h1>Thank you</h1><p> Your password has been successgully reset!</p>'
       };
 
-      transporter.sendMail(mailOptions, function(error, info){
+      transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
           console.log(error);
         } else {
