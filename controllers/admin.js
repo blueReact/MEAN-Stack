@@ -2,6 +2,7 @@
 
 // admin
 var jwt = require('jsonwebtoken');
+var registerUser = require('../models/registerModel');
 
 // admin protected route
 module.exports.blog = function (req, res) {
@@ -17,10 +18,38 @@ module.exports.blog = function (req, res) {
             res.status(403).json(err)
 
         else
-            res.status(200).json({
-                "message": "protected admin route",
-                "authData": authData
-            });
+            // res.status(200).json({
+            //     "message": "protected admin route",
+            //     "authData": authData
+            // });
+
+            // custom query 
+            var query = {
+                admin: {
+                    $eq: false // $eq is a comparison operator
+                }
+            }
+
+            registerUser
+                .find(query)
+                .sort({ 'createdAt': 1}) // 1 => old to new  && -1 => new to old
+                // .sort(username) // sorts name a-z in that order
+                // .sort({'username': -1}) // sorts name in reverse order
+                .exec()
+                .then( function(result) {
+                    res.status(200).json({
+                        "message": "success",
+                        "authData": result
+                    });
+                })
+                .catch(function(err){
+
+                    res.status(200).json({
+                        "message": "failed!",
+                        "authData": err
+                    });
+
+                })
 
     });
 }

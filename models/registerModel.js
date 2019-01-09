@@ -6,6 +6,10 @@ var registerSchema = new Schema({
         type: Date,
         default: Date.now()
     },*/
+    // userSession: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'userSessions'
+    // },
     username: {
         type: String,
         required: true,

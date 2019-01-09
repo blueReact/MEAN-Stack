@@ -37,7 +37,7 @@ mongoose.connect( MONGODB_URI, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
 
-// MongoDbStore configuration
+// MongoDb session storage configuration
 var store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: 'userSessions'
