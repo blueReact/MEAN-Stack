@@ -112,11 +112,11 @@
           }
         })
         .then(function (response) {
-          vm.response = response.data;
-          $location.path("/login");
+          vm.response = response.data;      
+          $location.path("/"); //login    
         })
         .catch(function (err) {
-          console.log(err);
+          console.log(err);          
         });
     }
 
