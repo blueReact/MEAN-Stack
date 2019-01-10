@@ -112,21 +112,7 @@ module.exports.login = function (req, res, next) {
   registerUser.find({
     email: (req.body.email).toLowerCase()
   }).then(function (user) {
-    bcrypt.compare(password, user[0].password, function (err, result) {
-      if (err) {
-
-        // console.log(err);
-
-        // scalable and customizable approach 
-        // for catching errors inside catch block 
-        var err = new Error(err);
-        err.code = 500;
-        err.message = 'Server failed';
-
-        // passing it to next catch block 
-        throw err;
-
-      }
+    bcrypt.compare(password, user[0].password, function (err, result) {     
 
       if (result) {
 
@@ -160,11 +146,20 @@ module.exports.login = function (req, res, next) {
 
       } else {
 
+        // return res.status(401).json({
+        //   message: 'Auth failed'
+        // });
+
+
         // never share why it failed
         // security
-        return res.status(401).json({
-          message: 'Auth failed'
-        });
+        var err = new Error(err);
+        err.code = 401;
+        err.message = 'Auth failed';
+
+        // passing it to next catch block 
+        throw err;
+        
       }
 
     });

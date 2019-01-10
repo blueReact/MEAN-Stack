@@ -27,7 +27,8 @@ var registerSchema = new Schema({
     email: {
         type: String,
         require: true,
-        trim: true
+        trim: true,
+        unique: true
     }
     
 },{
