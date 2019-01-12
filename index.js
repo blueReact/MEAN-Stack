@@ -18,6 +18,9 @@ var path = require('path'),
     mongoose = require('mongoose'),
     cookieParser = require('cookie-parser'),
 
+    // import config
+    dev = require('./config/dev'),
+
     // import routes
     data = require('./routes/data'),
     registerRoute = require('./routes/registerRoute'),
@@ -27,7 +30,7 @@ var path = require('path'),
     port = process.env.PORT || 3000,
     
     // MONGODB_URI
-    MONGODB_URI = 'mongodb://localhost/meanAJS',
+    MONGODB_URI = dev.MONGODB_URI,
     
     app = express();
 

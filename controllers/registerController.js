@@ -62,11 +62,11 @@ module.exports.register = function (req, res, next) {
           console.log('hash', hash);
 
           // toLowerCase the email
-          var email = req.body.email.toLowerCase();
+          // var email = req.body.email.toLowerCase(); ==> express validator middleware's, normalizeEmail
           registerUser.create({
               username: req.body.username,
               password: hash,
-              email: email
+              email: req.body.email
             })
             .then(function (result) {
 
@@ -106,13 +106,12 @@ module.exports.login = function (req, res, next) {
       errors: errors.array()
     });
   }
-
-  var password = req.body.password.toLowerCase();
+  
 
   registerUser.find({
-    email: (req.body.email).toLowerCase()
+    email: req.body.email
   }).then(function (user) {
-    bcrypt.compare(password, user[0].password, function (err, result) {     
+    bcrypt.compare(req.body.password, user[0].password, function (err, result) {     
 
       if (result) {
 
@@ -133,7 +132,7 @@ module.exports.login = function (req, res, next) {
         }); // Adds extra security => { expiresIn: '1h' } || { algorithm: 'HS512' }
 
         // setting a cookie with the useranme after succesfull login
-        res.cookie('username', user[0].username);
+        res.cookie('username', (user[0].username).toLowerCase());
 
         // logged in successfully
         res.status(200).json({
@@ -222,7 +221,7 @@ module.exports.reset = function (req, res, next) {
 
       // encrypting new password
       bcrypt.genSalt(12, function (err, salt) {
-        bcrypt.hash(req.body.password.toLowerCase(), salt, function (err, hash) {
+        bcrypt.hash(req.body.password, salt, function (err, hash) {
 
           registerUser
             .findOneAndUpdate({
@@ -269,14 +268,25 @@ module.exports.reset = function (req, res, next) {
       // scalable and customizable approach 
       // for catching errors inside catch block 
       var err = new Error(err);
-      err.code = 500;
+      err.code = 422;
       err.message = 'Password Reset failed';
 
       // passing it to next middleware with err object
       return next(err);
     }
 
-  });
+  }).catch(function (err) {    
+
+    // scalable and customizable approach 
+    // for catching errors inside catch block 
+    var err = new Error(err);
+    err.code = 500;
+    err.message = 'Password reset failed';
+
+    // passing it to next middleware with err object
+    return next(err);
+
+  });;
 }
 
 module.exports.logout = function (req, res) {
