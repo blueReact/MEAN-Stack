@@ -41,7 +41,7 @@ var path = require('path'),
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true
 }).then(function () {
-  console.log('Connected to Mongodb!');
+  console.log('Connected to',config.get('Name'),'!');
 }).catch(function () {
   console.log('Couldn\'t connect to Mongodb!');
 });
