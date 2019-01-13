@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var router = require('express').Router(),
   {
@@ -78,4 +78,4 @@ router.post('/reset', verifyToken, [
 // POST /user/logout
 router.post('/logout', registerController.logout);
 
-module.exports = router
+module.exports = router;

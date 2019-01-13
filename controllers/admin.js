@@ -30,11 +30,16 @@ module.exports.blog = function (req, res) {
                 }
             }
 
+            var pageNumber = 2;
+            var pageSize = 5;
+
             registerUser
                 .find(query)
+                .skip((pageNumber-1)*pageSize)
                 .sort({ 'createdAt': 1}) // 1 => old to new  && -1 => new to old
                 // .sort(username) // sorts name a-z in that order
                 // .sort({'username': -1}) // sorts name in reverse order
+                .limit(pageSize)
                 .exec()
                 .then( function(result) {
                     res.status(200).json({
