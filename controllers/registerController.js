@@ -4,6 +4,7 @@
 var bcrypt = require('bcryptjs'),
   jwt = require('jsonwebtoken'),
   nodemailer = require('nodemailer'),
+  config = require('config'),
   sendGridTransport = require('nodemailer-sendgrid-transport'),
   registerUser = require('../models/registerModel'),
   {
@@ -16,7 +17,7 @@ var bcrypt = require('bcryptjs'),
     port: 587,
     secure: false,
     auth: {
-      api_key: process.env.SEND_GRID_API
+      api_key: config.get('SEND_GRID_API')
     }
   }));
 
@@ -98,7 +99,7 @@ module.exports.register = function (req, res, next) {
 }
 
 module.exports.login = function (req, res, next) {
-
+ 
   // express validator
   var errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -127,7 +128,7 @@ module.exports.login = function (req, res, next) {
         var token = jwt.sign({
           email: user[0].email,
           userId: user[0]._id
-        }, process.env.JWT_KEY, {
+        }, config.get('JWT_KEY'), {
           expiresIn: '1h'
         }); // Adds extra security => { expiresIn: '1h' } || { algorithm: 'HS512' }
 
@@ -156,8 +157,8 @@ module.exports.login = function (req, res, next) {
         err.code = 401;
         err.message = 'Auth failed';
 
-        // passing it to next catch block 
-        throw err;
+        // passing it to next middleware with err object
+        return next(err);
         
       }
 

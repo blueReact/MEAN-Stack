@@ -28,6 +28,10 @@ var path = require('path'),
   registerRoute = require('./routes/registerRoute'),
   adminRoute = require('./routes/adminRoute'),
 
+  // import error
+  error = require('./middleware/error'),
+  JWT = require('./middleware/jwtCheck')(),
+
   // setting port
   port = process.env.PORT || 3000,
 
@@ -41,7 +45,7 @@ var path = require('path'),
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true
 }).then(function () {
-  console.log('Connected to',config.get('Name'),'!');
+  console.log('Connected to', config.get('Name'), '!');
 }).catch(function () {
   console.log('Couldn\'t connect to Mongodb!');
 });
@@ -99,11 +103,7 @@ app.use('/user', registerRoute);
 app.use('/api', adminRoute);
 
 // error handling middleware
-app.use(function (err, req, res, next) {
-  return res.status(err.code).json({
-    message: err.message
-  });
-});
+app.use(error);
 
 
 var osDeatils = {

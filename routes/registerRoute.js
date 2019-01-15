@@ -34,8 +34,9 @@ router.post('/register', [
   // trimming for white space is done in my model
   check('username')
   .isLength({
-    min: 5
-  }).withMessage("Username must be atleast 5 characters long!")
+    min: 5,
+    max: 30
+  }).withMessage("Username must be between 5 and 30 characters long!")
   .matches(/[a-zA-Z]/).withMessage("Username field should only contain alphabets!").trim(), // sanitize
 
   // must be an email

@@ -1,0 +1,4 @@
+{
+  "Name":"mLab",
+  "MONGODB_URI": "mongodb://roycodeman:rahul123@ds255924.mlab.com:55924/myblogcloud" 
+}

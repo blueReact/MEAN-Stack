@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prestart": "node buildScripts/startScript",
+    "prestart": "node buildScripts/minify",
     "start": "cross-env NODE_ENV=development & npm-run-all --parallel localserver minify",
     "share-dev": "cross-env NODE_ENV=development & npm-run-all --parallel localserver minify localtunnel",
     "prod": "cross-env NODE_ENV=production & npm-run-all --parallel localserver minify",
     "localserver": "nodemon index",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "minify": "node minify",
+    "minify": "node buildScripts/minify",
     "localtunnel": "lt --port 3000"
   },
   "repository": {

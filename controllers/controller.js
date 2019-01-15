@@ -2,10 +2,11 @@
 
 //controller
 var jwt = require('jsonwebtoken');
+var config = require('config')
 
 module.exports.data = function (req, res) {
 
-  jwt.verify(req.token, process.env.JWT_KEY, function (err, authData) {
+  jwt.verify(req.token, config.get('JWT_KEY'), function (err, authData) {
 
     if (err)
       res.status(403).json(err)
