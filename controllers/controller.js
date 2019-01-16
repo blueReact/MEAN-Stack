@@ -2,7 +2,7 @@
 
 //controller
 var jwt = require('jsonwebtoken');
-var config = require('config')
+var config = require('config');
 
 module.exports.data = function (req, res) {
 

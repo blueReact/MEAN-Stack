@@ -11,8 +11,7 @@ module.exports.blog = function (req, res) {
     /* res.status(200).json({
         "message": "protected admin route"
     }); */
-
-
+    
     jwt.verify(req.token, config.get('JWT_KEY'), function (err, authData) {
 
         if (err)
@@ -31,16 +30,16 @@ module.exports.blog = function (req, res) {
                 }
             }
 
-            var pageNumber = 2;
-            var pageSize = 5;
+            // var pageNumber = 2;
+            // var pageSize = 5;
 
             registerUser
                 .find(query)
-                .skip((pageNumber-1)*pageSize)
+                //.skip((pageNumber-1)*pageSize)
                 .sort({ 'createdAt': 1}) // 1 => old to new  && -1 => new to old
                 // .sort(username) // sorts name a-z in that order
                 // .sort({'username': -1}) // sorts name in reverse order
-                .limit(pageSize)
+                //.limit(pageSize)
                 .exec()
                 .then( function(result) {
                     res.status(200).json({

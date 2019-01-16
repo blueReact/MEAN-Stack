@@ -18,10 +18,7 @@ var path = require('path'),
   morgan = require('morgan'),
   mongoose = require('mongoose'),
   cookieParser = require('cookie-parser'),
-  config = require('config'),
-
-  // import config
-  //dev = require('./config/development.json'),
+  config = require('config'),  
 
   // import routes
   data = require('./routes/data'),
@@ -39,7 +36,22 @@ var path = require('path'),
   MONGODB_URI = config.get('MONGODB_URI'),
 
   app = express();
+  
+// if something goes wrong outside express's context
+// process.exit(1) ==> terminate the process
+process.on("uncaughtException", function(ex){
+  
+  console.log(ex);
+  process.exit(1);
 
+});
+
+process.on("unhandledRejection", function(ex){
+
+  console.log(ex);
+  process.exit(1);
+
+});
 
 // connect to mongodb
 mongoose.connect(MONGODB_URI, {

@@ -99,7 +99,10 @@ module.exports.register = function (req, res, next) {
 }
 
 module.exports.login = function (req, res, next) {
- 
+  
+  // fakin an error for winston
+  // throw new Error('Couldnt login');
+
   // express validator
   var errors = validationResult(req);
   if (!errors.isEmpty()) {
