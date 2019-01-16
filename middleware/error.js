@@ -18,8 +18,8 @@ module.exports = function (err, req, res, next) {
   var err = new Error(err);
   err.code = err.status || 500;
 
-  winston.error(err.message, err.code, err.message);
-  logger.info(err.message, err.code, err.message);
+  winston.error(err.code, err.message);
+  logger.info(err.code, err.message);
 
   // var err = new Error(err);
   // err.code = err.status || 500;  
