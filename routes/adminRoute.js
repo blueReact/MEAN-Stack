@@ -11,6 +11,12 @@ var router = require('express').Router(),
 // admin route 
 // restricted API
 // GET /api/blog
-router.get('/blog', auth, verifyToken, adminAuth, admin.blog);
+// router.get('/blog', auth, verifyToken, adminAuth, admin.blog);
+
+router.post('/blog', auth, verifyToken, adminAuth, admin.blogPost);
+router.get('/blog', admin.blogGetList);
+router.get('/blog/:id', admin.blogGetOne);
+router.put('/blog',auth, verifyToken, adminAuth, admin.blogPutOne);
+router.delete('/blog',auth, verifyToken, adminAuth, admin.deletePost);
 
 module.exports = router;

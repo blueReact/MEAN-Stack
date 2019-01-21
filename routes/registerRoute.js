@@ -6,7 +6,7 @@ var router = require('express').Router(),
   } = require('express-validator/check'),
 
   // controllers    
-  registerController = require('../controllers/registerController'),
+  registerController = require('../controllers/userController'),
 
   // middleware auth
   verifyToken = require('../middleware/jwt-route-auth');

@@ -290,7 +290,7 @@ module.exports.reset = function (req, res, next) {
     // passing it to next middleware with err object
     return next(err);
 
-  });;
+  });
 }
 
 module.exports.logout = function (req, res) {

@@ -1,10 +1,11 @@
 <!-- header -->
-<div ng-controller="myCtrl as vm">
+<div ng-controller="headerCtrl as vm">
 
     <a ng-href="/" ng-hide="isLoggedIn">login</a>
     <a ng-href="#!register" ng-hide="isLoggedIn">register</a>
+    <a ng-href="#!list">list</a>
     <a ng-href="#!reset" ng-hide="!isLoggedIn">reset</a>
-    <a ng-href="#!blog" ng-if="admin == 'true'">Blog</a>
+    <a ng-href="#!admin" ng-if="admin == 'true'">admin</a>
     <a ng-click="vm.logout()" ng-hide="!isLoggedIn">logout</a>
 
 </div>

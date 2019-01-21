@@ -1,3 +1,4 @@
 node_modules/
 nodemon.json
 config/development.json
+public/textangular

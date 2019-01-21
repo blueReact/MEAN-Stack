@@ -4,5 +4,5 @@
   
 // app.module.js
 angular
-    .module('myApp', ['ngRoute', 'ngCookies']);
+    .module('myApp', ['ngRoute', 'ngCookies', 'textAngular','ngSanitize']);
 })();

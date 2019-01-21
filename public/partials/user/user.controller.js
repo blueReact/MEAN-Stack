@@ -4,14 +4,15 @@
   // articles.controller.js
   angular
     .module('myApp')
-    .controller('myCtrl', myCtrl);
+    .controller('userCtrl', userCtrl);
 
-  myCtrl.$inject = ['$scope', '$rootScope', '$http', '$location', '$cookies'];
 
-  function myCtrl($scope, $rootScope, $http, $location, $cookies) {
+  userCtrl.$inject = ['$rootScope', '$http', '$location', '$cookies'];
 
-    var vm = this;
-    vm.fourNotFour = "404";
+
+  function userCtrl($rootScope, $http, $location, $cookies) {
+
+    var vm = this;    
 
     var token = "Bearer" + " " + localStorage.getItem("JWT");
     // console.log(token);
@@ -31,6 +32,7 @@
     console.log(favouriteCookie);
     //}
 
+
     // login
     vm.login = function () {
       $http({
@@ -49,28 +51,13 @@
           localStorage.setItem("admin", vm.response.admin)
           localStorage.setItem("isLoggedIn", vm.response.isLoggedIn)
           localStorage.setItem("userId", vm.response.userId)
-          $location.path("/data")
+          $location.path("/list")
         })
         .catch(function (err) {
           console.log(err)
         });
     }
 
-    // logout
-    vm.logout = function () {
-      $http.post('/user/logout', vm.user).then(function (response) {
-          vm.response = response.data;
-          console.log(vm.response);
-        })
-        .catch(function (err) {
-          console.log(err);
-          if (err.status === 555) {
-            vm.clearLocalStorage();
-            $cookies.remove('username');
-            $location.path("/");
-          }
-        });
-    }
 
     // reset
     vm.reset = function () {
@@ -119,56 +106,8 @@
         });
     }
 
-    // http GET data
-    // var token3rdparty = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoidHl1aSIsInBhc3N3b3JkIjoidHl1aSJ9LCJpYXQiOjE1NDI1NDczMTN9.46o8a-2ksgGpXhco0w-ljm-meCkbgFWWBzZefVfseoc';
 
-    $http({
-        method: 'get',
-        url: '/data',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: token
-        }
-      })
-      .then(function (response) {
-        console.log(response);
-        vm.response = response.data;
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
+  }
 
-
-
-    // blog
-    $http({
-        method: 'get',
-        url: '/api/blog',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: token
-        }
-      })
-      .then(function (response) {
-        console.log(response);
-        vm.blog = response.data;
-      })
-      .catch(function (err) {
-        console.log(err);
-        if (err.status === 401) {
-          vm.err = err.data
-        }
-      });
-
-
-    // to clear specific local storage based on key i.e JWT in this case
-    vm.clearLocalStorage = function () {
-      window.localStorage.removeItem("JWT");
-      window.localStorage.removeItem("admin");
-      window.localStorage.removeItem("isLoggedIn");
-      window.localStorage.removeItem("userId");
-    }
-
-  };
 
 })();

@@ -1,0 +1,21 @@
+
+<div ng-controller="listCtrl as vm">
+
+  <div ng-repeat="result in vm.blogGet">
+      <!-- <pre>{{result | json}}</pre> -->
+      <div ng-repeat="result in result">
+        <h4>  
+          <a ng-href="#!/detail/{{result._id}}">
+            <span>{{result.title}}</span></a>
+          <span class="pull-right" ng-click="vm.delete(result._id)">Del</span>
+          <span class="pull-right" ng-click="vm.edit(result._id)">Del</span>
+        </h4>
+        <p>{{result.description}}</p>
+        <p>{{result.createdAt | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+      </div>
+  </div>
+
+</div>
+
+
+

@@ -1,0 +1,18 @@
+
+<div ng-controller="listCtrl as vm">
+
+    <h1>Deatils</h1>
+
+    <h2>{{vm.blogGetOne.result[0].title}}</h2>
+
+    <h3>{{vm.blogGetOne.result[0].description}}</h3>
+
+    <p ng-bind-html="vm.blogGetOne.result[0].decode">
+      {{vm.blogGetOne.result[0].decode}}
+    </p>
+  
+  </div>
+  
+  
+  
+  

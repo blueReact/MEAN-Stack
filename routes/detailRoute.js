@@ -11,6 +11,6 @@ var router = require('express').Router(),
 
 
 // restricted API
-router.get('/data', auth, verifyToken, controllerApi.data);
+router.post('/detail', auth, verifyToken, controllerApi.detail);
 
 module.exports = router

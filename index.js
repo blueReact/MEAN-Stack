@@ -21,7 +21,7 @@ var path = require('path'),
   config = require('config'),  
 
   // import routes
-  data = require('./routes/data'),
+  detailRoute = require('./routes/detailRoute'),
   registerRoute = require('./routes/registerRoute'),
   adminRoute = require('./routes/adminRoute'),
 
@@ -62,6 +62,7 @@ mongoose.connect(MONGODB_URI, {
   console.log('Couldn\'t connect to Mongodb!');
 });
 mongoose.Promise = global.Promise;
+mongoose.set('useFindAndModify', false);
 
 
 // MongoDb session storage configuration
@@ -106,10 +107,12 @@ if (app.get('env') === 'development') {
  * routes
  *
  */
-app.use('/', data);
 
 // register a user
 app.use('/user', registerRoute);
+
+// detailRoute
+app.use('/api', detailRoute);
 
 // admin
 app.use('/api', adminRoute);
